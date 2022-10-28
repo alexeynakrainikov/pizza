@@ -18,13 +18,11 @@ const Categories = () => {
     return (
         <div className="categories">
             <ul>
-                {categories.map((category) =>
+                {categories.map((category, index) =>
                     (
-                        <li onClick={() => {
-                            setActiveCategory(categories.indexOf(category))
-                        }}
-                            className={active === categories.indexOf(category) && "active"}>{category}</li>
-                    ))
+                        <li onClick={() => {setActiveCategory(index)}} className={active === index ? "active" : ""}>{category}</li>
+                    )
+                )
                 }
             </ul>
         </div>
