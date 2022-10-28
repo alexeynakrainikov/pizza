@@ -18,14 +18,14 @@ const PizzaItem = ({imageUrl, title, types, sizes, price}) => {
                     {types.map((type, index) =>
                         <li onClick={() => {
                             setActiveType(index)
-                        }} className={activeType === index ? "active" : ""}>{!type ? "традиционное" : "тонкое"}</li>
+                        }} key={index} className={activeType === index ? "active" : ""}>{!type ? "традиционное" : "тонкое"}</li>
                     )}
                 </ul>
                 <ul>
                     {sizes.map((size, index) =>
                         <li onClick={() => {
                             setActiveSize(index)
-                        }} className={activeSize === index ? "active" : ""}>{size} см.</li>
+                        }} key={index} className={activeSize === index ? "active" : ""}>{size} см.</li>
                     )}
                 </ul>
             </div>
