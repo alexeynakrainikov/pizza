@@ -1,5 +1,9 @@
 @import '../variables.scss';
 
+.down {
+  transform: rotate(180deg);
+}
+
 .sort {
   position: relative;
   &__label {
@@ -8,6 +12,9 @@
 
     svg {
       margin-right: 8px;
+      :hover {
+        cursor: pointer;
+      }
     }
 
     b {

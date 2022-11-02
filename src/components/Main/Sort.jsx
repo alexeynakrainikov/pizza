@@ -2,18 +2,12 @@ import {useState} from "react";
 
 const Sort = (props) => {
 
-    const sortOptions = [
-        "популярности",
-        "цене",
-        "алфавиту"
-    ]
     const [isOpen, setOpen] = useState(false)
-    const [sortOption, setSortOption] = useState(0)
 
     return (
         <div className="sort">
             <div className="sort__label">
-                <svg
+                <svg className={props.asc?"":"down"} onClick={()=> props.setAsc(!props.asc)}
                     width="10"
                     height="6"
                     viewBox="0 0 10 6"
@@ -28,18 +22,18 @@ const Sort = (props) => {
                 <b>Сортировка по:</b>
                 <span onClick={() => {
                     setOpen(!isOpen)
-                }}>{sortOptions[sortOption]}</span>
+                }}>{props.sortOption.name}</span>
             </div>
             {isOpen &&
                 <div className="sort__popup">
                     <ul>
                         {
-                            sortOptions.map((option, index) =>
-                                <li key={option} onClick={() => {
-                                    setSortOption(index)
+                            props.sortOptions.map((optionObj, index) =>
+                                <li key={optionObj} onClick={() => {
+                                    props.setSortOption(optionObj)
                                     setOpen(!isOpen)
                                 }
-                                } className={sortOption === index ? "active" : ""}>{option}</li>
+                                } className={props.sortOption === optionObj ? "active" : ""}>{optionObj.name}</li>
                             )
                         }
                     </ul>

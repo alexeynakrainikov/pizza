@@ -1,7 +1,5 @@
-import {useState} from "react";
 
-const Categories = () => {
-    const [active, setActive] = useState(0)
+const Categories = (props) => {
 
     const categories = [
         "Все",
@@ -16,7 +14,7 @@ const Categories = () => {
             <ul>
                 {categories.map((category, index) =>
                     (
-                        <li onClick={() => {setActive(index)}} key={category} className={active === index ? "active" : ""}>{category}</li>
+                        <li onClick={() => {props.setActiveCategory(index)}} key={category} className={props.activeCategory === index ? "active" : ""}>{category}</li>
                     )
                 )
                 }
