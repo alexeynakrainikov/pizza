@@ -3,14 +3,19 @@
 .pizza-block {
   width: 280px;
   text-align: center;
-  margin-bottom: 65px;
 
-  &:not(:nth-of-type(4n)) {
-    margin-right: 35px;
+  @media (max-width: 420px) {
+    scale: (0.8);
+    margin-top: -50px;
+    margin-bottom: -50px;
   }
 
+  //&:not(:nth-of-type(4n)) {
+  //  margin-right: 35px;
+  //}
+
   &__image {
-    width: 260px;
+    max-width: 260px;
   }
 
   &__title {
