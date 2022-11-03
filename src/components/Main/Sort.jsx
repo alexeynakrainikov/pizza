@@ -1,13 +1,33 @@
 import {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {setSortValue} from "../../redux/redusers/sortSlice";
+import {setAsc} from "../../redux/redusers/ascSlice";
 
-const Sort = (props) => {
-
+const Sort = () => {
+    const sort = useSelector((state) => state.sort.value)
+    const asc = useSelector((state) => state.asc.value)
+    const dispatch = useDispatch()
     const [isOpen, setOpen] = useState(false)
+
+    const sortOptions = [
+        {
+            name: "популярности",
+            sortOption: "rating"
+        },
+        {
+            name: "цене",
+            sortOption: "price"
+        },
+        {
+            name: "алфавиту",
+            sortOption: "title"
+        }
+    ]
 
     return (
         <div className="sort">
             <div className="sort__label">
-                <svg className={props.asc?"":"down"} onClick={()=> props.setAsc(!props.asc)}
+                <svg className={asc?"":"down"} onClick={()=> dispatch(setAsc(!asc)) }
                     width="10"
                     height="6"
                     viewBox="0 0 10 6"
@@ -22,18 +42,18 @@ const Sort = (props) => {
                 <b>Сортировка по:</b>
                 <span onClick={() => {
                     setOpen(!isOpen)
-                }}>{props.sortOption.name}</span>
+                }}>{sort.name}</span>
             </div>
             {isOpen &&
                 <div className="sort__popup">
                     <ul>
                         {
-                            props.sortOptions.map((optionObj, index) =>
-                                <li key={optionObj} onClick={() => {
-                                    props.setSortOption(optionObj)
+                            sortOptions.map((optionObj, index) =>
+                                <li key={optionObj.name} onClick={() => {
+                                    dispatch(setSortValue(optionObj))
                                     setOpen(!isOpen)
                                 }
-                                } className={props.sortOption === optionObj ? "active" : ""}>{optionObj.name}</li>
+                                } className={sort === optionObj ? "active" : ""}>{optionObj.name}</li>
                             )
                         }
                     </ul>

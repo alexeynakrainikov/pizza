@@ -1,6 +1,9 @@
+import {useDispatch, useSelector} from "react-redux";
+import {setCategoryValue} from "../../redux/redusers/categorySlice";
 
-const Categories = (props) => {
-
+const Categories = () => {
+    const activeCategory = useSelector((state) => state.activeCategory.value)
+    const dispatch = useDispatch()
     const categories = [
         "Все",
         "Мясные",
@@ -14,7 +17,7 @@ const Categories = (props) => {
             <ul>
                 {categories.map((category, index) =>
                     (
-                        <li onClick={() => {props.setActiveCategory(index)}} key={category} className={props.activeCategory === index ? "active" : ""}>{category}</li>
+                        <li onClick={() => {dispatch(setCategoryValue(index))}} key={category} className={activeCategory === index ? "active" : ""}>{category}</li>
                     )
                 )
                 }
