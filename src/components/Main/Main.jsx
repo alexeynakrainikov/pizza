@@ -7,9 +7,9 @@ import {useSelector} from "react-redux";
 
 function Main() {
     const search = useSelector((state) => state.search.value)
-    const category = useSelector((state) => state.activeCategory.value)
-    const sort = useSelector((state) => state.sort.value)
-    const asc = useSelector((state) => state.asc.value)
+    const category = useSelector((state) => state.sort.activeCategory)
+    const filter = useSelector((state) => state.sort.filter)
+    const asc = useSelector((state) => state.sort.asc)
 
     const [pizzas, setPizzas] = useState([])
     const pizzasItems = !search?pizzas:
@@ -18,7 +18,7 @@ function Main() {
     )
     const [isFetching, setIsFetching] = useState(true)
 
-    const url = `https://635c04f266f78741d5900b17.mockapi.io/pizzas?category=${!category ? '' : category}&sortBy=${sort.sortOption}&order=${asc ? 'asc' : "desc"}`
+    const url = `https://635c04f266f78741d5900b17.mockapi.io/pizzas?category=${!category ? '' : category}&sortBy=${filter.sortOption}&order=${asc ? 'asc' : "desc"}`
 
     useEffect(() => {
         setIsFetching(true)

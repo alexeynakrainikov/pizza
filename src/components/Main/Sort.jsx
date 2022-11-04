@@ -1,11 +1,10 @@
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {setSortValue} from "../../redux/redusers/sortSlice";
-import {setAsc} from "../../redux/redusers/ascSlice";
+import {setSortValue,setAsc} from "../../redux/redusers/sortSlice";
 
 const Sort = () => {
-    const sort = useSelector((state) => state.sort.value)
-    const asc = useSelector((state) => state.asc.value)
+    const filter = useSelector((state) => state.sort.filter)
+    const asc = useSelector((state) => state.sort.asc)
     const dispatch = useDispatch()
     const [isOpen, setOpen] = useState(false)
 
@@ -42,7 +41,7 @@ const Sort = () => {
                 <b>Сортировка по:</b>
                 <span onClick={() => {
                     setOpen(!isOpen)
-                }}>{sort.name}</span>
+                }}>{filter.name}</span>
             </div>
             {isOpen &&
                 <div className="sort__popup">
@@ -53,7 +52,7 @@ const Sort = () => {
                                     dispatch(setSortValue(optionObj))
                                     setOpen(!isOpen)
                                 }
-                                } className={sort === optionObj ? "active" : ""}>{optionObj.name}</li>
+                                } className={filter === optionObj ? "active" : ""}>{optionObj.name}</li>
                             )
                         }
                     </ul>

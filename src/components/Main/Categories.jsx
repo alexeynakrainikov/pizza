@@ -1,8 +1,8 @@
 import {useDispatch, useSelector} from "react-redux";
-import {setCategoryValue} from "../../redux/redusers/categorySlice";
+import {setCategoryValue} from "../../redux/redusers/sortSlice";;
 
 const Categories = () => {
-    const activeCategory = useSelector((state) => state.activeCategory.value)
+    const activeCategory = useSelector((state) => state.sort.activeCategory)
     const dispatch = useDispatch()
     const categories = [
         "Все",
