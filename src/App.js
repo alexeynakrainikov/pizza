@@ -2,7 +2,7 @@ import './scss/app.scss';
 import Header from "./components/Header/Header";
 import {Route, Routes} from "react-router-dom";
 import Main from "./components/Main/Main";
-import Cart from "./components/Cart";
+import Cart from "./components/Cart/Cart";
 
 function App() {
     return (

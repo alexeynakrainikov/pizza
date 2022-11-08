@@ -1,9 +1,24 @@
 import {useState} from "react";
+import {useDispatch} from "react-redux";
+import {addItem} from "../../redux/redusers/cartSlice";
 
 const PizzaItem = ({imageUrl, title, types, sizes, price}) => {
 
-    const [activeType, setActiveType] = useState(0)
+    const [activeType, setActiveType] = useState(types[0])
     const [activeSize, setActiveSize] = useState(0)
+
+    const dispatch = useDispatch()
+    const cartItem = {
+        title,
+        type: activeType,
+        size: sizes[activeSize],
+        price: !activeSize ? price : Math.ceil(price * sizes[activeSize]/sizes[0]),
+        counter: 1
+    }
+
+    const addToCart = () => {
+        dispatch(addItem(cartItem))
+    }
 
     return (
         <div className="pizza-block">
@@ -15,10 +30,11 @@ const PizzaItem = ({imageUrl, title, types, sizes, price}) => {
             <h4 className="pizza-block__title">{title}</h4>
             <div className="pizza-block__selector">
                 <ul>
-                    {types.map((type, index) =>
+                    {types.map((type) =>
                         <li onClick={() => {
-                            setActiveType(index)
-                        }} key={index} className={activeType === index ? "active" : ""}>{!type ? "традиционное" : "тонкое"}</li>
+                            setActiveType(type)
+                        }} key={type}
+                            className={activeType === type ? "active" : ""}>{type}</li>
                     )}
                 </ul>
                 <ul>
@@ -30,7 +46,7 @@ const PizzaItem = ({imageUrl, title, types, sizes, price}) => {
                 </ul>
             </div>
             <div className="pizza-block__bottom">
-                <div className="pizza-block__price">от {price} ₽</div>
+                <div className="pizza-block__price">{cartItem.price} ₽</div>
                 <div className="button button--outline button--add">
                     <svg
                         width="12"
@@ -44,8 +60,7 @@ const PizzaItem = ({imageUrl, title, types, sizes, price}) => {
                             fill="white"
                         />
                     </svg>
-                    <span>Добавить</span>
-                    <i>0</i>
+                    <span onClick={() => addToCart()}>Добавить</span>
                 </div>
             </div>
         </div>
